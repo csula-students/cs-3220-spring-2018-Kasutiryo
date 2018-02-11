@@ -1,0 +1,45 @@
+.terminal {
+	border: 2px solid grey;
+	color: white;
+	background-color: black;
+	width: 90%;
+	height: 10em;
+}
+.coinPouch {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	
+}
+.generatorCol {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.optionTitle {
+	font-size: 2rem;
+	font-weight: bold;
+	color: red;
+}
+
+#option {
+	border: 3px solid black;
+	margin: 1em;
+}
+
+html {
+    font-size: 62.5%; /* reset back to 10px */
+    font-family: Avenir Next,Helvetica,Arial,Sans-Serif;
+}
+
+body {
+    font-size: 1.8rem;
+    line-height: 1.618;
+    max-width: 38em;
+    margin: auto;
+    color: #4a4a4a;
+    background-color: #f9f9f9;
+    padding: 1.3rem;
+}
