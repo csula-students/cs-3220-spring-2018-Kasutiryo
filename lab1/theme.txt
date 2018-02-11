@@ -1,0 +1,18 @@
+Theme:
+# RPG
+
+Resource: 
+* Coins
+
+Generators:
+* Cursor
+* Workers
+* PVPers
+* PVMers
+* More too come...
+
+Story:
+* You are thrown into an different realm, with NO MONEY.
+* Click away, and gather coins. Use these coins to hire workers,
+* assasians, fighters, you name it. Each of which, will generate 
+* a different amount of coins. Good luck!
