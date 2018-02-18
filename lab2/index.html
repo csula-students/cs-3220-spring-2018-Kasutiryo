@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        window.incrementalGame = {
+            state: {
+                counter: 0
+            }
+        };
+    </script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="app.css">
+    <title>World of Coins</title>
+</head>
+
+<body>
+    <div class="col">
+        <h1>World of Coins</h1>
+        <div class="terminal">Data.................................</div>
+        <div class="row" id="coinPouch">
+            <h2>COINS: </h2>
+            <output id="coins">0</output>
+            <button id="clicker"> BEG FOR MONEY </button>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5> Farm Worker </h5>
+                <p>
+                    You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people. But they don't
+                    sell for much.
+                </p>
+                <div class="row">
+                    <p class="rate">{RATE}</p>
+                    <button> {COINS} </button>
+                </div>
+            </div>
+            <div class="col">
+                <h5> Hunter </h5>
+                <p>
+                    You hire a experienced hunter to go out and kill monsters and other wild entities. The hunter will gather their spoils and
+                    sell them in village for you. They are work a reasonable amount of coins.
+                </p>
+                <div class="row">
+                    <p class="rate">{RATE}</p>
+                    <button> {COINS} </button>
+                </div>
+            </div>
+            <div class="col">
+                <h5> Theive </h5>
+                <p>
+                    You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.
+                </p>
+                <div class="row">
+                    <p class="rate">{RATE}</p>
+                    <button> {COINS} </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        const pubSub = new PubSub();
+        
+        pubSub.subscribe(data => {
+            window.incrementalGame.state.counter++;
+            document.getElementById("coins").innerHTML = window.incrementalGame.state.counter;
+        });
+
+        document.querySelector('#clicker').addEventListener('click', function () {
+            pubSub.publish(window.incrementalGame.state.counter);
+        });
+
+    </script>
+
+</body>
+
+</html>
