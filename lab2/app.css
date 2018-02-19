@@ -2,31 +2,41 @@
 	border: 2px solid grey;
 	color: white;
 	background-color: black;
-	width: 90%;
-	height: 10em;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: scroll;
+
 }
 
-.row {
+.row, .coinPouchRow {
+    /* rows */
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
+    align-content: center;
 }
 
-.col {
+.generators_1, generators_2, generators_3, .col {
+    /* columns */
 	display: flex;
-	flex-direction: column;
-    justify-content: space-between;
-    padding: 1em;
+    flex-direction: column;
 }
 
 .rate {
 	font-size: 1rem;
 }
 
-#coinPouch {
-	width: 25%;
-	
+.coinPouchRow {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+.coinPouch {
+    padding: 1em;
+}
+
+.generators_1, .generators_2, .generators_3 {
+    border: 2px solid red;
+    padding: 1em;
+    margin: 1rem;
 }
 
 html {
@@ -37,9 +47,22 @@ html {
 body {
     font-size: 1.8rem;
     line-height: 1.618;
-    max-width: 75em;
+    max-width: 50em;
     margin: auto;
     color: #4a4a4a;
     background-color: #f9f9f9;
     padding: 1.3rem;
+    border-left: 2px solid red;
+    border-right: 2px solid red;
+}
+footer {
+    border-top: 2px solid red;
+    padding: 2em;
+    margin-top: 2em;
+    text-align: center;
+}
+
+h1 {
+    border-bottom: 2px solid red;
+    margin-bottom: 2em;
 }
