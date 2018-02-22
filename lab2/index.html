@@ -17,7 +17,7 @@
 
 <body>
     <div class="col">
-        <h1>World of Coins</h1>
+        <div class="title">World of Coins</div>
         <div class="terminal">  
             Scrollbar Test!<br/>
             Scrollbar Test!<br/>
@@ -66,21 +66,6 @@
             </div>
         </div>
     </div>
-    <script>
-
-        const pubSub = new PubSub();
-
-        pubSub.subscribe(data => {
-            window.incrementalGame.state.counter++;
-            document.getElementById("coins").innerHTML = window.incrementalGame.state.counter;
-        });
-
-        document.querySelector('#clicker').addEventListener('click', function () {
-            pubSub.publish(window.incrementalGame.state.counter);
-        });
-
-    </script>
-
 </body>
 <footer>
     Copyright © 2018  - CS 3220 - California State University, Los Angeles

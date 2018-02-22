@@ -10,7 +10,7 @@
 
 .row, .coinPouchRow {
     /* rows */
-	display: flex;
+	display: flex;  
     flex-direction: row;
     align-content: center;
 }
@@ -39,6 +39,13 @@
     margin: 1rem;
 }
 
+.title {
+    color: whitesmoke;
+    background-color: black; 
+    font-size: 3.5rem; 
+    margin-bottom: 1rem;    
+}
+
 html {
     font-size: 62.5%;
     font-family: Avenir Next,Helvetica,Arial,Sans-Serif;
@@ -51,7 +58,9 @@ body {
     margin: auto;
     color: #4a4a4a;
     background-color: #f9f9f9;
-    padding: 1.3rem;
+    padding-bottom: 1.3rem;
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
     border-left: 2px solid red;
     border-right: 2px solid red;
 }

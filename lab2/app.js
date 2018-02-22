@@ -17,6 +17,17 @@ class PubSub {
     }
 }
 
+const pubSub = new PubSub();
+
+pubSub.subscribe(data => {
+    window.incrementalGame.state.counter++;
+    document.getElementById("coins").innerHTML = window.incrementalGame.state.counter;
+});
+
+document.querySelector('#clicker').addEventListener('click', function () {
+    pubSub.publish(window.incrementalGame.state.counter);
+});
+
 // const pubSub = new PubSub();
 
 // pubSub.subscribe(data => {
