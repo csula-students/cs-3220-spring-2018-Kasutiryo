@@ -14,15 +14,15 @@
   "author": "Eric Liao <rcliao01@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@webcomponents/webcomponentsjs": "^1.0.22"
+    "@webcomponents/webcomponentsjs": "^1.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-jest": "^22.0.4",
+    "babel-jest": "^22.4.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "jest": "^22.0.4",
+    "jest": "^22.4.2",
     "regenerator-runtime": "^0.11.1",
-    "webpack": "^3.10.0"
+    "webpack": "^3.11.0"
   }
 }
