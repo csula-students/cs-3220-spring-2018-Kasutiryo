@@ -3,13 +3,17 @@ export default function (store) {
 		constructor () {
 			super();
 			this.store = store;
-
+			
 			// TODO: render generator initial view
 
 			// TODO: subscribe to store on change event
 
 			// TODO: add click event
 
+		}
+
+		handleStateChange (newState) {
+			console.log('test', this, newState);
 		}
 
 		connectedCallback () {
