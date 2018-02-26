@@ -11,5 +11,26 @@ export default function (store) {
 			// TODO: add click event
 
 		}
+
+		connectedCallback () {
+			console.log('Element connection in progress...');
+			this.innerHTML = `
+			<div class="generators_1">
+				<h5> Farm Worker </h5>
+				<p>You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people.
+					But they don't sell for much.</p>
+				<div class="row">
+					<p class="rate">{RATE}</p>
+					<button> {COINS} </button>
+				</div>
+			</div>
+			`;
+			console.log('Element connected');
+		}
+
+		disconnectedCallback () {
+			console.log('Element disconnection in progress...');
+			console.log('Element disconnected');
+		}
 	};
 }

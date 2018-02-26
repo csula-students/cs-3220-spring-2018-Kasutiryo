@@ -5,10 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="app.css">
-    <title>Document</title>
+    <script>
+        window.incrementalGame = {
+            state: {
+                counter: 0
+            }
+        };
+    </script>
+    
+<title>Document</title>
 </head>
 <body>
-    <script src="dest/app.bundle.js"></script>
+ 
     <div class="header">
         <div class="gameTitle">World of Coins</div>
     </div>
@@ -32,7 +40,14 @@
             <button class="coinPouch" id="clicker"> BEG FOR MONEY </button>
 
         </div>
+
         <div class="row">
+            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.1.0/webcomponents-lite.js"></script> 
+            <script src="dest/app.bundle.js"></script>  
+            <game-generator data-id="0">Test</game-generator>
+
+            <!-- 
             <div class="generators_1">
                 <h5> Farm Worker </h5>
                 <p>You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people.
@@ -59,10 +74,13 @@
                     <button> {COINS} </button>
                 </div>
             </div>
+             -->
+
         </div>
     </div>
     <div class="footer">
         Copyright © 2018  - CS 3220 - California State University, Los Angeles
     </div>
+    <script src="app.js"></script>
 </body>
 </html>
