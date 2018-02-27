@@ -22,36 +22,36 @@
 
 }
 
-.row, .coinPouchRow {
+.coinPouchRow, .generatorRow, .purchaseRow {
     /* rows */
 	display: flex;  
     flex-direction: row;
     align-content: center;
 }
+    .coinPouchRow {
+        margin-bottom: 1em;
+        margin-top: 1em;
+    }
 
-.generators_1, generators_2, generators_3, .col {
-    /* columns */
-	display: flex;
-    flex-direction: column;
-}
+        .coinPouch {
+            padding: 1em;
+        }
 
-.rate {
-	font-size: 1rem;
-}
+    .generatorBox {
+        display: flex;
+        flex-direction: column;
+        border: 2px solid rgb(71, 71, 70);
+        padding: 1em;
+        margin: 1rem;
+    }
 
-.coinPouchRow {
-    margin-bottom: 1em;
-    margin-top: 1em;
-}
-.coinPouch {
-    padding: 1em;
-}
+        .description {
+            
+        }
 
-.generators_1, .generators_2, .generators_3 {
-    border: 2px solid rgb(71, 71, 70);
-    padding: 1em;
-    margin: 1rem;
-}
+        .rate {
+            font-size: 1rem;
+        }
 
 .footer {
     border-top: 2px solid rgb(71, 71, 70)   ;

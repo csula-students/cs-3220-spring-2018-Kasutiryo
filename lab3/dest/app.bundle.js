@@ -178,7 +178,6 @@ function main() {
 	// initialize store
 	const store = new _store2.default(_reducer2.default, initialState);
 	console.log((0, _example2.default)(store));
-	console.log((0, _generator2.default)(store));
 
 	// define web components
 	window.customElements.define('component-example', (0, _example2.default)(store));
@@ -884,17 +883,40 @@ exports.default = function (store) {
 
 		connectedCallback() {
 			console.log('Element connection in progress...');
-			this.innerHTML = `
-			<div class="generators_1">
-				<h5> Farm Worker </h5>
-				<p>You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people.
-					But they don't sell for much.</p>
-				<div class="row">
-					<p class="rate">{RATE}</p>
-					<button> {COINS} </button>
-				</div>
-			</div>
-			`;
+			const message = this.dataset.message;
+			switch (message) {
+				case '0':
+					this.innerHTML = `
+						<h5> Farm Worker </h5>
+						<p class="description">You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people.
+							But they don't sell for much.</p>
+						<div class="purchaseRow">
+							<p class="rate">{RATE}</p>
+							<button>Purchase</button>
+						</div>
+					`;break;
+				case '1':
+					this.innerHTML = `
+						<h5> Hunter </h5>
+						<p class="description">You hire a experienced hunter to go out and kill monsters and other wild entities. The hunter will gather
+							their spoils and sell them in village for you. They are work a reasonable amount of coins.</p>
+						<div class="purchaseRow">
+							<p class="rate">{RATE}</p>
+							<button> {COINS} </button>
+						</div>
+					`;break;
+				case '2':
+					this.innerHTML = `
+						<h5> Theive </h5>
+						<p>You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.</p>
+						<div class="purchaseRow">
+							<p class="rate">{RATE}</p>
+							<button> {COINS} </button>
+						</div>
+					`;break;
+				default:
+					console.log('Someone wrong happened');
+			}
 			console.log('Element connected');
 		}
 
