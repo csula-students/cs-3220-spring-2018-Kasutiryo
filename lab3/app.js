@@ -20,10 +20,11 @@ class PubSub {
 const pubSub = new PubSub();
 
 pubSub.subscribe(data => {
-    window.incrementalGame.state.counter++;
-    document.getElementById("coins").innerHTML = window.incrementalGame.state.counter;
+    window.store.__state.counter++;
+    document.getElementById("coins").innerHTML = window.store.__state.counter;
+
 });
 
 document.querySelector('#clicker').addEventListener('click', function () {
-    pubSub.publish(window.incrementalGame.state.counter);
+    pubSub.publish(window.store.__state.counter);
 });

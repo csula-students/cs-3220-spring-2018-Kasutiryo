@@ -22,7 +22,7 @@
 
 }
 
-.coinPouchRow, .generatorRow, .purchaseRow {
+.coinPouchRow, .generatorRow, .titleRow, .purchaseRow {
     /* rows */
 	display: flex;  
     flex-direction: row;
@@ -45,13 +45,21 @@
         margin: 1rem;
     }
 
-        .description {
+        .titleRow {
+            justify-content: space-between;
+            text-align: center;
+        }
+        /* .description {
             
+        } */
+
+        .purchaseRow {
+            justify-content: space-between;
         }
 
-        .rate {
-            font-size: 1rem;
-        }
+            .rate {
+                font-size: 1rem;
+            }
 
 .footer {
     border-top: 2px solid rgb(71, 71, 70)   ;
@@ -76,6 +84,10 @@
     border-left: 2px solid rgb(71, 71, 70);
     border-right: 2px solid rgb(71, 71, 70);
 }
+
+/* button {
+
+} */
 
 body {
     padding: 0;
