@@ -31,18 +31,14 @@
             Scrollbar Test!<br/>
             Scrollbar Test!<br/>
         </div>
-        <div class="coinPouchRow">
-            <div class="coinPouch">COINS: </div>
-            <output class="coinPouch" id="coins">0</output>
-            <button class="coinPouch" id="clicker"> BEG FOR MONEY </button>
-        </div>
+        <game-counter class="coinPouchRow"></game-counter>
         <div class="generatorRow">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.1.0/webcomponents-lite.js"></script> 
-            <script src="dest/app.bundle.js"></script>  
-            <game-generator class="generatorBox" data-message='0'></game-generator>
-            <game-generator class="generatorBox" data-message='1'></game-generator>
-            <game-generator class="generatorBox" data-message='2'></game-generator>
-        </div>
+            <game-generator class="generatorBox" data-id='10' data-payload="FARMER"></game-generator>
+            <game-generator class="generatorBox" data-id='25' data-payload="HUNTER"></game-generator>
+            <game-generator class="generatorBox" data-id='50' data-payload="THEIVE"></game-generator>
+        </div>            <script src="dest/app.bundle.js"></script>  
+
     </div>
     <div class="footer">
         Copyright © 2018  - CS 3220 - California State University, Los Angeles

@@ -171,7 +171,7 @@ function main() {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
-		generators: [],
+		generators: ['FARM_WORKER', 'HUNTER', 'THEIVE'],
 		story: []
 	};
 
@@ -739,6 +739,30 @@ function reducer(state, action) {
 		case 'EXAMPLE_MUTATION':
 			state.example = action.payload;
 			return state;
+			break;
+
+		case 'BUY_GENERATOR':
+
+			if (action.payload === 'FARMER') {
+				state.counter = state.counter - 10;
+				store.state.quantity++;
+				window.store.__state.counter = state.counter;
+			} else if (action.payload === 'HUNTER') {
+				state.counter = state.counter - 25;
+				window.store.__state.counter = state.counter;
+			} else if (action.payload === 'THEIVE') {
+				state.counter = state.counter - 50;
+				window.store.__state.counter = state.counter;
+			}
+			return state;
+			break;
+
+		case 'ADD_COINS':
+			state.counter++;
+			window.store.__state.counter = state.counter;
+			return state;
+			break;
+
 		default:
 			return state;
 	}
@@ -786,13 +810,25 @@ exports.default = function (store) {
 			super();
 			this.store = store;
 			// TODO: render counter inner HTML based on the store state
+			this.innerHTML = `
+					<div class="coinPouch">COINS: </div>
+					<output class="coinPouch" id="coins">0</output>
+					<button class="coinPouch" id="clicker"> BEG FOR MONEY </button>
 
+			`;
 			this.onStateChange = this.handleStateChange.bind(this);
+
+			this.querySelector('#clicker').addEventListener('click', () => {
+				this.store.dispatch({
+					type: 'ADD_COINS'
+				});
+			});
 		}
 
 		handleStateChange(newState) {
 			console.log('CounterComponent#stateChange', this, newState);
 			// TODO: update inner HTML based on the new state
+			document.getElementById("coins").innerHTML = window.store.__state.counter;
 		}
 
 		connectedCallback() {
@@ -869,30 +905,64 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
-			console.log('GeneratorComponent#Got store', this.store);
-			// TODO: render generator initial view
-
+			this.init();
 			// TODO: subscribe to store on change event
 			this.onStateChange = this.handleStateChange.bind(this);
 			// TODO: add click event
-			this.addEventListener('click', () => {
-				this.store.dispatch({
-					type: 'EXAMPLE_MUTATION',
-					payload: 'You clicked this element'
+
+			// document.querySelector('#FARMER').addEventListener('click', () =>{
+			// 	this.store.dispatch({
+			// 		type: 'BUY_GENERATOR',
+			// 		payload: 'FARMER',
+			// 	});
+			// });
+
+			// document.querySelector('#HUNTER').addEventListener('click1', () =>{
+			// 	this.store.dispatch({
+			// 		type: 'BUY_GENERATOR',
+			// 		payload: 'HUNTER',
+			// 	});
+			// });
+
+			// document.querySelector('#THEIVE').addEventListener('click2', () =>{
+			// 	this.store.dispatch({
+			// 		type: 'BUY_GENERATOR',
+			// 		payload: 'THEIVE'
+			// 	});
+			// });
+
+			const btns = this.querySelectorAll('#gen');
+
+			btns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					this.store.dispatch({
+						type: 'BUY_GENERATOR',
+						payload: this.dataset.payload
+					});
 				});
 			});
 		}
 
 		handleStateChange(newState) {
-			console.log('GeneratorComponent#stateChange', this);
-			this.textContent = newState.example;
+			console.log('GeneratorComponent#stateChange', this, newState);
+			this.store.subscribe(newState);
 		}
 
 		connectedCallback() {
-			console.log('Element connection in progress...');
-			const message = this.dataset.message;
-			switch (message) {
-				case '0':
+			console.log('GeneratorComponent#onConnectedCallback');
+			this.store.subscribe(this.onStateChange);
+		}
+
+		disconnectedCallback() {
+			console.log('GeneratorComponent#onDisconnectedCallback');
+			this.store.unsubscribe(this.onStateChange);
+		}
+
+		init() {
+			const ID = this.dataset.id;
+			// TODO: render generator initial view
+			switch (ID) {
+				case '10':
 					this.innerHTML = `
 						<div class="titleRow">
 							<h5> Farm Worker </h5>
@@ -902,10 +972,10 @@ exports.default = function (store) {
 							But they don't sell for much.</p>
 						<div class="purchaseRow">
 							<p class="rate">{RATE}</p>
-							<button>Purchase</button>
+							<button ID='gen'>Purchase</button>
 						</div>
 					`;break;
-				case '1':
+				case '25':
 					this.innerHTML = `
 						<div class="titleRow">
 							<h5> Hunter </h5>
@@ -915,10 +985,10 @@ exports.default = function (store) {
 							their spoils and sell them in village for you. They are work a reasonable amount of coins.</p>
 						<div class="purchaseRow">
 							<p class="rate">{RATE}</p>
-							<button>Purchase</button>
+							<button ID='gen'>Purchase</button>
 						</div>
 					`;break;
-				case '2':
+				case '50':
 					this.innerHTML = `
 						<div class="titleRow">
 							<h5> Theive </h5>
@@ -927,19 +997,12 @@ exports.default = function (store) {
 						<p>You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.</p>
 						<div class="purchaseRow">
 							<p class="rate">{RATE}</p>
-							<button>Purchase</button>
+							<button ID='gen'>Purchase</button>
 						</div>
 					`;break;
 				default:
 					console.log('Someone wrong happened');
 			}
-			console.log('GeneratorComponent#onConnectedCallback');
-			this.store.subscribe(this.onStateChange);
-		}
-
-		disconnectedCallback() {
-			console.log('Element disconnection in progress...');
-			console.log('Element disconnected');
 		}
 	};
 };
