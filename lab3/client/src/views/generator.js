@@ -7,44 +7,12 @@ export default function (store) {
 			// TODO: subscribe to store on change event
 			this.onStateChange = this.handleStateChange.bind(this);
 			// TODO: add click event
-
-			// document.querySelector('#FARMER').addEventListener('click', () =>{
-			// 	this.store.dispatch({
-			// 		type: 'BUY_GENERATOR',
-			// 		payload: 'FARMER',
-			// 	});
-			// });
-
-			// document.querySelector('#HUNTER').addEventListener('click1', () =>{
-			// 	this.store.dispatch({
-			// 		type: 'BUY_GENERATOR',
-			// 		payload: 'HUNTER',
-			// 	});
-			// });
-
-			// document.querySelector('#THEIVE').addEventListener('click2', () =>{
-			// 	this.store.dispatch({
-			// 		type: 'BUY_GENERATOR',
-			// 		payload: 'THEIVE'
-			// 	});
-			// });
-
-			const btns = this.querySelectorAll('#gen');
-
-			btns.forEach(btn => {
-				btn.addEventListener('click', () => {
-					this.store.dispatch({
-						type: 'BUY_GENERATOR',
-						payload: this.dataset.payload,
-					});
-				});
-			});
+			this.addBtnEvents();
 		}
 
 		handleStateChange(newState) {
 			console.log('GeneratorComponent#stateChange', this, newState);
 			this.store.subscribe(newState);
-
 		}
 
 		connectedCallback() {
@@ -102,5 +70,42 @@ export default function (store) {
 				default: console.log('Someone wrong happened');
 			}
 		}
+
+		addBtnEvents() {
+			
+			const btns = this.querySelectorAll('#gen');
+
+			btns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					this.store.dispatch({
+						type: 'BUY_GENERATOR',
+						payload: this.dataset.payload,
+					});
+				});
+			});
+		}
 	};
 }
+			// Another attempt at adding the button events without using
+			// an additional data attribute
+
+			// document.querySelector('#FARMER').addEventListener('click', () =>{
+			// 	this.store.dispatch({
+			// 		type: 'BUY_GENERATOR',
+			// 		payload: 'FARMER',
+			// 	});
+			// });
+
+			// document.querySelector('#HUNTER').addEventListener('click1', () =>{
+			// 	this.store.dispatch({
+			// 		type: 'BUY_GENERATOR',
+			// 		payload: 'HUNTER',
+			// 	});
+			// });
+
+			// document.querySelector('#THEIVE').addEventListener('click2', () =>{
+			// 	this.store.dispatch({
+			// 		type: 'BUY_GENERATOR',
+			// 		payload: 'THEIVE'
+			// 	});
+			// });

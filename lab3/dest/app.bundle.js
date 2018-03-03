@@ -743,24 +743,29 @@ function reducer(state, action) {
 
 		case 'BUY_GENERATOR':
 
-			if (action.payload === 'FARMER') {
-				state.counter = state.counter - 10;
-				store.state.quantity++;
-				window.store.__state.counter = state.counter;
-			} else if (action.payload === 'HUNTER') {
-				state.counter = state.counter - 25;
-				window.store.__state.counter = state.counter;
-			} else if (action.payload === 'THEIVE') {
-				state.counter = state.counter - 50;
-				window.store.__state.counter = state.counter;
+			if (action.payload === 'FARMER' && state.counter > 10) {
+				// state.counter = state.counter - 10;
+				// window.store.__state.counter = state.counter;
+				window.store.__state.counter = window.store.__state.counter - 10;
+			} else if (action.payload === 'HUNTER' && state.counter > 25) {
+				// state.counter = state.counter - 25;
+				// window.store.__state.counter = state.counter;
+				window.store.__state.counter = window.store.__state.counter - 25;
+			} else if (action.payload === 'THEIVE' && state.counter > 50) {
+				// state.counter = state.counter - 50;
+				// window.store.__state.counter = state.counter;
+				window.store.__state.counter = window.store.__state.counter - 50;
+			} else {
+				alert("You do not have enough funds");
 			}
-			return state;
+			return window.store;
 			break;
 
 		case 'ADD_COINS':
-			state.counter++;
-			window.store.__state.counter = state.counter;
-			return state;
+			// state.counter++;
+			window.store.__state.counter++;
+			// window.store.__state.counter = state.counter;
+			return window.store;
 			break;
 
 		default:
@@ -909,38 +914,7 @@ exports.default = function (store) {
 			// TODO: subscribe to store on change event
 			this.onStateChange = this.handleStateChange.bind(this);
 			// TODO: add click event
-
-			// document.querySelector('#FARMER').addEventListener('click', () =>{
-			// 	this.store.dispatch({
-			// 		type: 'BUY_GENERATOR',
-			// 		payload: 'FARMER',
-			// 	});
-			// });
-
-			// document.querySelector('#HUNTER').addEventListener('click1', () =>{
-			// 	this.store.dispatch({
-			// 		type: 'BUY_GENERATOR',
-			// 		payload: 'HUNTER',
-			// 	});
-			// });
-
-			// document.querySelector('#THEIVE').addEventListener('click2', () =>{
-			// 	this.store.dispatch({
-			// 		type: 'BUY_GENERATOR',
-			// 		payload: 'THEIVE'
-			// 	});
-			// });
-
-			const btns = this.querySelectorAll('#gen');
-
-			btns.forEach(btn => {
-				btn.addEventListener('click', () => {
-					this.store.dispatch({
-						type: 'BUY_GENERATOR',
-						payload: this.dataset.payload
-					});
-				});
-			});
+			this.addBtnEvents();
 		}
 
 		handleStateChange(newState) {
@@ -1003,6 +977,20 @@ exports.default = function (store) {
 				default:
 					console.log('Someone wrong happened');
 			}
+		}
+
+		addBtnEvents() {
+
+			const btns = this.querySelectorAll('#gen');
+
+			btns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					this.store.dispatch({
+						type: 'BUY_GENERATOR',
+						payload: this.dataset.payload
+					});
+				});
+			});
 		}
 	};
 };
