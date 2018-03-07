@@ -1,39 +1,26 @@
-export default function reducer(state, action) {
+export default function reducer (state, action) {
 	switch (action.type) {
-		case 'EXAMPLE_MUTATION':
-			state.example = action.payload;
-			return state;
-			break;
-			
-		case 'BUY_GENERATOR': 
-		
-			if (action.payload === 'FARMER' && state.counter > 10) {
-				// state.counter = state.counter - 10;
-				// window.store.__state.counter = state.counter;
-				window.store.__state.counter = window.store.__state.counter - 10;
-			} else if (action.payload === 'HUNTER' && state.counter > 25) {
-				// state.counter = state.counter - 25;
-				// window.store.__state.counter = state.counter;
-				window.store.__state.counter = window.store.__state.counter - 25;
-			} else if (action.payload === 'THEIVE' && state.counter > 50) {
-				// state.counter = state.counter - 50;
-				// window.store.__state.counter = state.counter;
-				window.store.__state.counter = window.store.__state.counter - 50;
+	case 'EXAMPLE_MUTATION':
+		state.example = action.payload;
+		return state;
+	case 'BUTTON_CLICK':
+		console.log('Incremented coin by 1');
+		state.counter++;
+		return state;
+	case 'BUY_GENERATOR':
+
+		for (var i = 0; i < state.generators.length; i++) {
+			if (action.payload.name === state.generators[i].name && state.counter >= state.generators[i].baseCost) {
+				state.counter -= state.generators[i].baseCost;
+				state.generators[i].quantity++;
+				return state;
 			} else {
-				alert("You do not have enough funds");
+				alert('You do not have enough cash');
+				return state;
 			}
-			return window.store;
-			break;
-
-		case 'ADD_COINS':
-			// state.counter++;
-			window.store.__state.counter++;
-			// window.store.__state.counter = state.counter;
-			return window.store;
-			break;
-
-		default:
-			return state;
+		}
+	default:
+		return state;
 	}
 }
 

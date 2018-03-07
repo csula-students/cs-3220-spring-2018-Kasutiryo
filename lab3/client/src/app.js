@@ -75,9 +75,37 @@ main();
 function main () {
 	// TODO: fill the blank based on the theme you have choosen
 	const initialState = {
-		example: 'Hello custom element',
-		counter: 0,
-		generators: ['FARM_WORKER', 'HUNTER', 'THEIVE'],
+		// example: 'Hello custom element',
+		counter: 10,
+		generators: [
+				{
+					baseCost: 10,
+					description: "words go here",
+					name: "FARMER",
+					quantity: 0,
+					rate: 10,
+					type: "something goes here",
+					unlockValue: 10,
+				},
+				{
+					baseCost: 15,
+					description: "words go here",
+					name: "HUNTER",
+					quantity: 0,
+					rate: 10,
+					type: "something goes here",
+					unlockValue: 10,
+				},
+				{
+					baseCost: 20,
+					description: "words go here",
+					name: "FARMER",
+					quantity: 0,
+					rate: 10,
+					type: "something goes here",
+					unlockValue: 10,
+				}
+			],
 		story: []
 	};
 

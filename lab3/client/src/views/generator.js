@@ -1,48 +1,38 @@
 export default function (store) {
 	return class GeneratorComponent extends window.HTMLElement {
-		constructor() {
+		constructor () {
 			super();
 			this.store = store;
-			this.init();
-			// TODO: subscribe to store on change event
 			this.onStateChange = this.handleStateChange.bind(this);
-			// TODO: add click event
-			this.addBtnEvents();
-		}
-
-		handleStateChange(newState) {
-			console.log('GeneratorComponent#stateChange', this, newState);
-			this.store.subscribe(newState);
-		}
-
-		connectedCallback() {
-			console.log('GeneratorComponent#onConnectedCallback');
-			this.store.subscribe(this.onStateChange);
-		}
-
-		disconnectedCallback() {
-			console.log('GeneratorComponent#onDisconnectedCallback');
-			this.store.unsubscribe(this.onStateChange);
-		}
-
-		init() {
-			const ID = this.dataset.id;
 			// TODO: render generator initial view
-			switch (ID) {
-				case '10':
-					this.innerHTML = `
+
+			// TODO: subscribe to store on change event
+
+			// TODO: add click event
+
+		}
+
+		handleStateChange (newState) {
+			console.log('GeneratorComponent#stateChange', newState.generators);
+
+		}
+
+		connectedCallback () {
+			console.log('GeneratorComponent#onConnectedCallback');
+			switch (this.dataset.id) {
+				case "0":
+					this.innerHTML = `                
 						<div class="titleRow">
 							<h5> Farm Worker </h5>
 							<p class="rate">0</p>
 						</div>
-						<p class="description">You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people.
-							But they don't sell for much.</p>
+						<p class="description">You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people. Butthey don't sell for much.</p>
 						<div class="purchaseRow">
 							<p class="rate">{RATE}</p>
 							<button ID='gen'>Purchase</button>
-						</div>
-					`; break;
-				case '25':
+						</div>`;
+						break;
+				case "1":					
 					this.innerHTML = `
 						<div class="titleRow">
 							<h5> Hunter </h5>
@@ -54,9 +44,10 @@ export default function (store) {
 							<p class="rate">{RATE}</p>
 							<button ID='gen'>Purchase</button>
 						</div>
-					`; break;
-				case '50':
-					this.innerHTML = `
+					`;
+					break;
+				case "2":
+						this.innerHTML = `
 						<div class="titleRow">
 							<h5> Theive </h5>
 							<p class="rate">0</p>
@@ -66,46 +57,30 @@ export default function (store) {
 							<p class="rate">{RATE}</p>
 							<button ID='gen'>Purchase</button>
 						</div>
-					`; break;
-				default: console.log('Someone wrong happened');
+					`;
+					break;
+				default: console.log('Something went wrong');
 			}
-		}
 
-		addBtnEvents() {
-			
 			const btns = this.querySelectorAll('#gen');
 
 			btns.forEach(btn => {
 				btn.addEventListener('click', () => {
 					this.store.dispatch({
 						type: 'BUY_GENERATOR',
-						payload: this.dataset.payload,
+						payload: {
+							name: `${this.store.state.generators[this.dataset.id].name}`,
+							quantity: `${this.store.state.generators[this.dataset.id].quantity}`,
+						}
 					});
 				});
 			});
+
+			this.store.subscribe(this.onStateChange);
+		}
+
+		disconnectedCallBack () {
+			this.store.unsubscribe(this.onStateChange);
 		}
 	};
 }
-			// Another attempt at adding the button events without using
-			// an additional data attribute
-
-			// document.querySelector('#FARMER').addEventListener('click', () =>{
-			// 	this.store.dispatch({
-			// 		type: 'BUY_GENERATOR',
-			// 		payload: 'FARMER',
-			// 	});
-			// });
-
-			// document.querySelector('#HUNTER').addEventListener('click1', () =>{
-			// 	this.store.dispatch({
-			// 		type: 'BUY_GENERATOR',
-			// 		payload: 'HUNTER',
-			// 	});
-			// });
-
-			// document.querySelector('#THEIVE').addEventListener('click2', () =>{
-			// 	this.store.dispatch({
-			// 		type: 'BUY_GENERATOR',
-			// 		payload: 'THEIVE'
-			// 	});
-			// });

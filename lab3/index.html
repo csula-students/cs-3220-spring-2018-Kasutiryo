@@ -5,14 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="app.css">
-    <script>
-        window.incrementalGame = {
-            state: {
-                counter: 0
-            }
-        };
-    </script>
-    <title>World of Coins</title>
+    <title>Document</title>
 </head>
 <body>
     <div class="header">
@@ -31,18 +24,25 @@
             Scrollbar Test!<br/>
             Scrollbar Test!<br/>
         </div>
-        <game-counter class="coinPouchRow"></game-counter>
+        
+        <div class="coinPouchRow">
+            <div class="coinPouch">COINS: </div>
+            <!-- <output class="coinPouch" id="coins">0</output>
+            <button class="coinPouch" id="clicker"> BEG FOR MONEY </button> -->
+            <game-counter class="coinPouch"></game-counter>
+            <game-button class="coinPouch"></game-button>
+        </div>
         <div class="generatorRow">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.1.0/webcomponents-lite.js"></script> 
-            <game-generator class="generatorBox" data-id='10' data-payload="FARMER"></game-generator>
-            <game-generator class="generatorBox" data-id='25' data-payload="HUNTER"></game-generator>
-            <game-generator class="generatorBox" data-id='50' data-payload="THEIVE"></game-generator>
-        </div>            <script src="dest/app.bundle.js"></script>  
-
-    </div>
+            <game-generator class="generatorBox" data-id="0"></game-generator>
+            <game-generator class="generatorBox" data-id="1"></game-generator>
+            <game-generator class="generatorBox" data-id="2"></game-generator>
+        </div>
+        </div>
     <div class="footer">
         Copyright © 2018  - CS 3220 - California State University, Los Angeles
     </div>
-    <script src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.1.0/webcomponents-lite.js"></script> 
+    <script src="dest/app.bundle.js"></script>
 </body>
 </html>
