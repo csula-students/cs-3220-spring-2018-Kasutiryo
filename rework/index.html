@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="app.css">
+    <script>
+        window.incrementalGame = {
+            state: {
+                counter: 0
+            }
+        };
+    </script>
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <div class="gameTitle">World of Coins</div>
+    </div>
+    <div class="content">
+        <div class="terminal">  
+            Scrollbar Test!<br/>
+            Scrollbar Test!<br/>
+            Scrollbar Test!<br/>
+            Scrollbar Test!<br/>
+            Scrollbar Test!<br/>
+            Scrollbar Test!<br/>
+            Scrollbar Test!<br/>
+            Scrollbar Test!<br/>
+            Scrollbar Test!<br/>
+            Scrollbar Test!<br/>
+        </div>
+        
+        <div class="coinPouchRow">
+            <div class="coinPouch">COINS: </div>
+            <output class="coinPouch" id="coins">0</output>
+            <button class="coinPouch" id="clicker"> BEG FOR MONEY </button>
+
+        </div>
+        <div class="row">
+            <div class="generators_1">
+                <h5> Farm Worker </h5>
+                <p>You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people.
+                    But they don't sell for much.</p>
+                <div class="row">
+                    <p class="rate">{RATE}</p>
+                    <button> {COINS} </button>
+                </div>
+            </div>
+            <div class="generators_2">
+                <h5> Hunter </h5>
+                <p>You hire a experienced hunter to go out and kill monsters and other wild entities. The hunter will gather
+                    their spoils and sell them in village for you. They are work a reasonable amount of coins.</p>
+                <div class="row">
+                    <p class="rate">{RATE}</p>
+                    <button> {COINS} </button>
+                </div>
+            </div>
+            <div class="generators_3">
+                <h5> Theive </h5>
+                <p>You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.</p>
+                <div class="row">
+                    <p class="rate">{RATE}</p>
+                    <button> {COINS} </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        Copyright © 2018  - CS 3220 - California State University, Los Angeles
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
