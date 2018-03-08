@@ -998,8 +998,7 @@ exports.default = function (store) {
 						type: 'BUY_GENERATOR',
 						payload: {
 							name: `${this.store.state.generators[this.dataset.id].name}`,
-							quantity: `${this.store.state.generators[this.dataset.id].quantity}`,
-							baseCost: `${this.store.state.generators[this.dataset.id].baseCost}`
+							quantity: `${this.store.state.generators[this.dataset.id].quantity}`
 						}
 					});
 				});
