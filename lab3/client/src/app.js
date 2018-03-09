@@ -76,11 +76,11 @@ function main () {
 	// TODO: fill the blank based on the theme you have choosen
 	const initialState = {
 		// example: 'Hello custom element',
-		counter: 10,
+		counter: 999,
 		generators: [
 				{
 					baseCost: 10,
-					description: "words go here",
+					description: "You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people. Butthey don't sell for much.",
 					name: "FARMER",
 					quantity: 0,
 					rate: 10,
@@ -89,7 +89,7 @@ function main () {
 				},
 				{
 					baseCost: 15,
-					description: "words go here",
+					description: "You hire a experienced hunter to go out and kill monsters and other wild entities. The hunter will gather their spoils and sell them in village for you. They are work a reasonable amount of coins.",
 					name: "HUNTER",
 					quantity: 0,
 					rate: 10,
@@ -98,8 +98,8 @@ function main () {
 				},
 				{
 					baseCost: 20,
-					description: "words go here",
-					name: "FARMER",
+					description: "You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.",
+					name: "THEIVE",
 					quantity: 0,
 					rate: 10,
 					type: "something goes here",

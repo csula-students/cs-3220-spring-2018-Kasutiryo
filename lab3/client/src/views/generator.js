@@ -14,53 +14,44 @@ export default function (store) {
 
 		handleStateChange (newState) {
 			console.log('GeneratorComponent#stateChange', newState.generators);
+			this.innerHTML = `                
+						<div class="titleRow">
+							<h5> ${newState.generators[this.dataset.id].name} </h5>
+							<p class="rate" id="quantity">${newState.generators[this.dataset.id].quantity}</p>
+						</div>
+						<p class="description">${newState.generators[this.dataset.id].description}</p>
+						<div class="purchaseRow">
+							<p class="rate">${newState.generators[this.dataset.id].rate}</p>
+							<button ID='gen'>Purchase</button>
+						</div>`;
+			const btns = this.querySelectorAll('#gen');
 
+			btns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					this.store.dispatch({
+						type: 'BUY_GENERATOR',
+						payload: {
+							name: `${newState.generators[this.dataset.id].name}`,
+							quantity: `${newState.generators[this.dataset.id].quantity}`,
+						}
+					});
+				});
+			});
 		}
 
 		connectedCallback () {
 			console.log('GeneratorComponent#onConnectedCallback');
-			switch (this.dataset.id) {
-				case "0":
-					this.innerHTML = `                
+
+			this.innerHTML = `                
 						<div class="titleRow">
-							<h5> Farm Worker </h5>
-							<p class="rate">0</p>
+							<h5> ${this.store.state.generators[this.dataset.id].name} </h5>
+							<p class="rate" id="quantity">${this.store.state.generators[this.dataset.id].quantity}</p>
 						</div>
-						<p class="description">You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people. Butthey don't sell for much.</p>
+						<p class="description">${this.store.state.generators[this.dataset.id].description}</p>
 						<div class="purchaseRow">
-							<p class="rate">{RATE}</p>
+							<p class="rate">${this.store.state.generators[this.dataset.id].rate}</p>
 							<button ID='gen'>Purchase</button>
 						</div>`;
-						break;
-				case "1":					
-					this.innerHTML = `
-						<div class="titleRow">
-							<h5> Hunter </h5>
-							<p class="rate">0</p>
-						</div>
-						<p class="description">You hire a experienced hunter to go out and kill monsters and other wild entities. The hunter will gather
-							their spoils and sell them in village for you. They are work a reasonable amount of coins.</p>
-						<div class="purchaseRow">
-							<p class="rate">{RATE}</p>
-							<button ID='gen'>Purchase</button>
-						</div>
-					`;
-					break;
-				case "2":
-						this.innerHTML = `
-						<div class="titleRow">
-							<h5> Theive </h5>
-							<p class="rate">0</p>
-						</div>
-						<p>You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.</p>
-						<div class="purchaseRow">
-							<p class="rate">{RATE}</p>
-							<button ID='gen'>Purchase</button>
-						</div>
-					`;
-					break;
-				default: console.log('Something went wrong');
-			}
 
 			const btns = this.querySelectorAll('#gen');
 
