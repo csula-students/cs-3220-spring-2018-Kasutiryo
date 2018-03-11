@@ -653,7 +653,6 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.loop = loop;
-exports.increment = increment;
 // default interval as 1 second
 const interval = 1000;
 
@@ -665,16 +664,19 @@ function loop(store) {
 	// TODO: increment counter based on the generators in the state
 	// hint: read how many "generators" in store and iterate through them to
 	//       count how many value to increment to "resource"
+	// hint: remember to change event through `store.dispatch`
 
 
 	// TODO: triggers stories from story to display state if they are passed
 	//       the `triggeredAt` points
+	// hint: user store.dispatch to send event for changing events states
+	// recursively calls loop method every second
 	setTimeout(loop.bind(this, store), interval);
 }
-
-function increment(state, modifier = 1) {
-	return state.counter + 1 * modifier;
-}
+// DELETED BY PROF. ERIC FOR SOME REASON...
+// export function increment (state, modifier = 1) {
+// 	return state.counter + 1 * modifier;
+// }
 
 /***/ }),
 /* 5 */
@@ -1024,15 +1026,29 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
-
+			//TODO: initial DOM rendering of story itself
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 
 		handleStateChange(newState) {
 			// TODO: display story based on the state "resource" and "stories"
+			console.log('StorybookComponent#stateChange');
 		}
 
 		connectedCallback() {
+			console.log('StorybookComponent#onConnectedCallback');
+			this.innerHTML = `
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+			`;
 			this.store.subscribe(this.onStateChange);
 		}
 

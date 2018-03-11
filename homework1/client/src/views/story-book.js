@@ -9,9 +9,23 @@ export default function (store) {
 
 		handleStateChange (newState) {
 			// TODO: display story based on the state "resource" and "stories"
+			console.log('StorybookComponent#stateChange');
 		}
 
 		connectedCallback () {
+			console.log('StorybookComponent#onConnectedCallback');
+			this.innerHTML = `
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+				Scrollbar Test!<br/>
+			`;
 			this.store.subscribe(this.onStateChange);
 		}
 
