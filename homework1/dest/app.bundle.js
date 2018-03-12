@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,37 +70,170 @@
 "use strict";
 
 
-__webpack_require__(1);
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+class Story {
+	/**
+  * create a new story based on the meta passed in argument
+  * @constructor
+  * @param {object} meta - the meta data for story
+  */
+	constructor(meta) {
+		this.name = meta.name;
+		this.description = meta.description;
+		this.triggeredAt = meta.triggeredAt;
+		this.state = meta.state;
+	}
 
-var _game = __webpack_require__(4);
+	/**
+  * isUnlockYet checks if this story is ready to be unlocked yet
+  * @param {number} value - the resource value at the moment
+  * @return {boolean} if this story is unlockable
+  */
+	isUnlockYet(value) {
+		// TODO: implement based on doc
 
-var _store = __webpack_require__(5);
+		if (value > this.triggeredAt) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+  * unlock simply unlock the story to visible state
+  */
+	unlock() {
+		// TODO: change the story state to "visible"
+		this.state = 'visible';
+	}
+}
+exports.default = Story;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+exports.default = function (store) {
+	return class GeneratorComponent extends window.HTMLElement {
+		constructor() {
+			super();
+			this.store = store;
+			this.onStateChange = this.handleStateChange.bind(this);
+			// TODO: render generator initial view
+
+			// TODO: subscribe to store on change event
+
+			// TODO: add click event
+		}
+
+		handleStateChange(newState) {
+			console.log('GeneratorComponent#stateChange', newState.generators);
+			this.innerHTML = `                
+						<div class="titleRow">
+							<h5> ${newState.generators[this.dataset.id].name} </h5>
+							<p class="rate" id="quantity">${newState.generators[this.dataset.id].quantity}</p>
+						</div>
+						<p class="description">${newState.generators[this.dataset.id].description}</p>
+						<div class="purchaseRow">
+							<p class="rate">${newState.generators[this.dataset.id].rate}</p>
+							<button ID='gen'>Purchase</button>
+						</div>`;
+			const btns = this.querySelectorAll('#gen');
+
+			btns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					this.store.dispatch({
+						type: 'BUY_GENERATOR',
+						payload: newState.generators[this.dataset.id]
+					});
+				});
+			});
+		}
+
+		connectedCallback() {
+			console.log('GeneratorComponent#onConnectedCallback');
+
+			this.innerHTML = `                
+						<div class="titleRow">
+							<h5> ${this.store.state.generators[this.dataset.id].name} </h5>
+							<p class="rate" id="quantity">${this.store.state.generators[this.dataset.id].quantity}</p>
+						</div>
+						<p class="description">${this.store.state.generators[this.dataset.id].description}</p>
+						<div class="purchaseRow">
+							<p class="rate">${this.store.state.generators[this.dataset.id].rate}</p>
+							<button ID='gen'>Purchase</button>
+						</div>`;
+
+			const btns = this.querySelectorAll('#gen');
+
+			btns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					this.store.dispatch({
+						type: 'BUY_GENERATOR',
+						payload: this.store.state.generators[this.dataset.id]
+					});
+				});
+			});
+
+			this.store.subscribe(this.onStateChange);
+		}
+
+		disconnectedCallBack() {
+			this.store.unsubscribe(this.onStateChange);
+		}
+	};
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(3);
+
+var _game = __webpack_require__(6);
+
+var _store = __webpack_require__(7);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _reducer = __webpack_require__(6);
+var _reducer = __webpack_require__(8);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _button = __webpack_require__(7);
+var _button = __webpack_require__(11);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _counter = __webpack_require__(8);
+var _counter = __webpack_require__(12);
 
 var _counter2 = _interopRequireDefault(_counter);
 
-var _example = __webpack_require__(9);
+var _example = __webpack_require__(13);
 
 var _example2 = _interopRequireDefault(_example);
 
-var _generator = __webpack_require__(10);
+var _generator = __webpack_require__(1);
 
 var _generator2 = _interopRequireDefault(_generator);
 
-var _storyBook = __webpack_require__(11);
+var _storyBook = __webpack_require__(14);
 
 var _storyBook2 = _interopRequireDefault(_storyBook);
+
+var _story = __webpack_require__(0);
+
+var _story2 = _interopRequireDefault(_story);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -170,33 +303,48 @@ function main() {
 	// TODO: fill the blank based on the theme you have choosen
 	const initialState = {
 		// example: 'Hello custom element',
-		counter: 999,
+		counter: 0,
 		generators: [{
-			baseCost: 10,
-			description: "You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people. Butthey don't sell for much.",
+			type: "something goes here",
 			name: "FARMER",
+			description: "You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people. Butthey don't sell for much.",
+			rate: 1,
 			quantity: 0,
-			rate: 10,
-			type: "something goes here",
+			baseCost: 10,
 			unlockValue: 10
 		}, {
-			baseCost: 15,
-			description: "You hire a experienced hunter to go out and kill monsters and other wild entities. The hunter will gather their spoils and sell them in village for you. They are work a reasonable amount of coins.",
+			type: "something goes here",
 			name: "HUNTER",
+			description: "You hire a experienced hunter to go out and kill monsters and other wild entities. The hunter will gather their spoils and sell them in village for you. They are work a reasonable amount of coins.",
+			rate: 2,
 			quantity: 0,
-			rate: 10,
-			type: "something goes here",
-			unlockValue: 10
+			baseCost: 15,
+			unlockValue: 20
 		}, {
-			baseCost: 20,
-			description: "You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.",
-			name: "THEIVE",
-			quantity: 0,
-			rate: 10,
 			type: "something goes here",
-			unlockValue: 10
+			name: "THEIVE",
+			description: "You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.",
+			rate: 3,
+			quantity: 0,
+			baseCost: 25,
+			unlockValue: 30
 		}],
-		story: []
+		story: [{
+			name: "FARMER",
+			description: 'Picking crops...',
+			triggeredAt: 10,
+			state: `hidden`
+		}, {
+			name: "HUNTER",
+			description: 'Hunting for wild animals...',
+			triggeredAt: 15,
+			state: `hidden`
+		}, {
+			name: "THEIVE",
+			description: 'Pickpocketing random people with heavy pockets...',
+			triggeredAt: 25,
+			state: 'hidden'
+		}]
 	};
 
 	// initialize store
@@ -222,7 +370,7 @@ function main() {
 }
 
 /***/ }),
-/* 1 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function(){/*
@@ -423,10 +571,10 @@ Eg.whenReady(function(){requestAnimationFrame(function(){window.WebComponents.re
 
 //# sourceMappingURL=webcomponents-lite.js.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(5)))
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var g;
@@ -453,7 +601,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -643,7 +791,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -665,11 +813,33 @@ function loop(store) {
 	// hint: read how many "generators" in store and iterate through them to
 	//       count how many value to increment to "resource"
 	// hint: remember to change event through `store.dispatch`
+	var value = 0;
+	for (var i = 0; i < store.state.generators.length; i++) {
+		value += store.state.generators[i].quantity * store.state.generators[i].rate;
+	}
 
+	store.dispatch({
+		type: 'INCREMENT',
+		payload: value
+	});
+
+	for (var i = 0; i < store.state.generators.length; i++) {
+
+		if (store.state.generators[i].quantity > 0) {
+			var currentConsole = document.querySelector('.terminal').innerHTML;
+			document.querySelector('.terminal').innerHTML = `
+				${currentConsole} <br/>
+				${store.state.story[i].description}
+			`;
+		}
+	}
 
 	// TODO: triggers stories from story to display state if they are passed
 	//       the `triggeredAt` points
 	// hint: user store.dispatch to send event for changing events states
+	store.dispatch({
+		type: 'CHECK_STORY'
+	});
 	// recursively calls loop method every second
 	setTimeout(loop.bind(this, store), interval);
 }
@@ -679,7 +849,7 @@ function loop(store) {
 // }
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -750,7 +920,7 @@ function deepCopy(obj) {
 }
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -760,24 +930,31 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.default = reducer;
+
+var _generator = __webpack_require__(9);
+
+var _generator2 = _interopRequireDefault(_generator);
+
+var _story = __webpack_require__(0);
+
+var _story2 = _interopRequireDefault(_story);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function reducer(state, action) {
 	switch (action.type) {
 		case 'EXAMPLE_MUTATION':
 			state.example = action.payload;
 			return state;
 		case 'BUTTON_CLICK':
-			console.log('Incremented coin by 1');
 			state.counter++;
 			return state;
 		case 'BUY_GENERATOR':
 
 			for (var i = 0; i < state.generators.length; i++) {
-
-				var newCost = Math.round((state.generators[i].baseCost * Math.pow(1 + 0.05, state.generators[i].quantity)).toFixed(2) * 100) / 100;
-
+				const generator = new _generator2.default(state.generators[i]);
+				var newCost = generator.getCost();
 				if (action.payload.name === state.generators[i].name && state.counter >= newCost) {
-					console.log(action.payload.name + ' = ' + state.generators[i].name);
-					console.log(state.counter + ' >= ' + newCost);
 					state.counter -= newCost;
 					state.generators[i].quantity++;
 					return state;
@@ -785,13 +962,111 @@ function reducer(state, action) {
 			}
 			alert('You do not have enough cash');
 			return state;
+
+		case 'INCREMENT':
+
+			state.counter += action.payload;
+			return state;
+
+		case 'CHECK_STORY':
+
+			for (var i = 0; i < state.story.length; i++) {
+				if (state.counter >= state.story[i].triggeredAt && state.story[i].state === 'hidden') {
+					state.story[i].state = 'visible';
+				}
+			}
+
+			return state;
+
 		default:
 			return state;
 	}
 }
 
 /***/ }),
-/* 7 */
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _constants = __webpack_require__(10);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Generator {
+	/**
+  * Create a new generator based on the meta object passing in
+  * @constructor
+  * @param {object} meta - meta object for constructing generator
+  */
+	constructor(meta) {
+		this.type = meta.type;
+		this.name = meta.name;
+		this.description = meta.description;
+		this.rate = meta.rate;
+		this.quantity = meta.quantity;
+		this.baseCost = meta.baseCost;
+		this.unlockValue = meta.unlockValue;
+	}
+
+	/**
+  * getCost computes cost exponentially based on quantity (as formula below)
+  * xt = x0(1 + r)^t
+  * which 
+  * xt is the value of x with t quantity
+  * x0 is base value
+  * r is growth ratio (see constants.growthRatio)
+  * t is the quantity
+  * @return {number} the cost of buying another generator
+  */
+	getCost() {
+		// TODO: implement the function according to doc above
+		var xt = (this.baseCost * Math.pow(1 + 0.05, this.quantity)).toFixed(2);
+		return Math.round(xt * 100) / 100;
+	}
+
+	/**
+  * generate computes how much this type of generator generates -
+  * rate * quantity
+  * @return {number} how much this generator generates
+  */
+	generate() {
+		// TODO: implement based on doc above
+		return this.rate * this.quantity;
+	}
+}
+exports.default = Generator;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	growthRatio: 0.05,
+	actions: {
+		EXAMPLE: 'EXAMPLE_MUTATION',
+		BUY_GENERATOR: 'BUY_GENERATOR',
+		BUTTON_CLICK: 'BUTTON_CLICK',
+		INCREMENT: 'INCREMENT',
+		CHECK_STORY: 'CHECK_STORY'
+	}
+};
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -837,7 +1112,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -875,7 +1150,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -923,95 +1198,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-exports.default = function (store) {
-	return class GeneratorComponent extends window.HTMLElement {
-		constructor() {
-			super();
-			this.store = store;
-			this.onStateChange = this.handleStateChange.bind(this);
-			// TODO: render generator initial view
-
-			// TODO: subscribe to store on change event
-
-			// TODO: add click event
-		}
-
-		handleStateChange(newState) {
-			console.log('GeneratorComponent#stateChange', newState.generators);
-			this.innerHTML = `                
-						<div class="titleRow">
-							<h5> ${newState.generators[this.dataset.id].name} </h5>
-							<p class="rate" id="quantity">${newState.generators[this.dataset.id].quantity}</p>
-						</div>
-						<p class="description">${newState.generators[this.dataset.id].description}</p>
-						<div class="purchaseRow">
-							<p class="rate">${newState.generators[this.dataset.id].rate}</p>
-							<button ID='gen'>Purchase</button>
-						</div>`;
-			const btns = this.querySelectorAll('#gen');
-
-			btns.forEach(btn => {
-				btn.addEventListener('click', () => {
-					this.store.dispatch({
-						type: 'BUY_GENERATOR',
-						payload: {
-							name: `${newState.generators[this.dataset.id].name}`,
-							quantity: `${newState.generators[this.dataset.id].quantity}`
-						}
-					});
-				});
-			});
-		}
-
-		connectedCallback() {
-			console.log('GeneratorComponent#onConnectedCallback');
-
-			this.innerHTML = `                
-						<div class="titleRow">
-							<h5> ${this.store.state.generators[this.dataset.id].name} </h5>
-							<p class="rate" id="quantity">${this.store.state.generators[this.dataset.id].quantity}</p>
-						</div>
-						<p class="description">${this.store.state.generators[this.dataset.id].description}</p>
-						<div class="purchaseRow">
-							<p class="rate">${this.store.state.generators[this.dataset.id].rate}</p>
-							<button ID='gen'>Purchase</button>
-						</div>`;
-
-			const btns = this.querySelectorAll('#gen');
-
-			btns.forEach(btn => {
-				btn.addEventListener('click', () => {
-					this.store.dispatch({
-						type: 'BUY_GENERATOR',
-						payload: {
-							name: `${this.store.state.generators[this.dataset.id].name}`,
-							quantity: `${this.store.state.generators[this.dataset.id].quantity}`
-						}
-					});
-				});
-			});
-
-			this.store.subscribe(this.onStateChange);
-		}
-
-		disconnectedCallBack() {
-			this.store.unsubscribe(this.onStateChange);
-		}
-	};
-};
-
-/***/ }),
-/* 11 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1038,16 +1225,8 @@ exports.default = function (store) {
 		connectedCallback() {
 			console.log('StorybookComponent#onConnectedCallback');
 			this.innerHTML = `
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
+				Welcome to the World of Coins!
+
 			`;
 			this.store.subscribe(this.onStateChange);
 		}
@@ -1057,6 +1236,12 @@ exports.default = function (store) {
 		}
 	};
 };
+
+var _generator = __webpack_require__(1);
+
+var _generator2 = _interopRequireDefault(_generator);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ })
 /******/ ]);

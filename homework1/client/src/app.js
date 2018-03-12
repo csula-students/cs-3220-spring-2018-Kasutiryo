@@ -9,6 +9,7 @@ import CounterComponent from './views/counter';
 import ExampleComponent from './views/example';
 import GeneratorComponent from './views/generator';
 import StoryBookComponent from './views/story-book';
+import Story from './models/story';
 
 /**
  * Data flow diagram
@@ -76,37 +77,56 @@ function main () {
 	// TODO: fill the blank based on the theme you have choosen
 	const initialState = {
 		// example: 'Hello custom element',
-		counter: 999,
+		counter: 0,
 		generators: [
-				{
-					baseCost: 10,
-					description: "You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people. Butthey don't sell for much.",
-					name: "FARMER",
-					quantity: 0,
-					rate: 10,
-					type: "something goes here",
-					unlockValue: 10,
-				},
-				{
-					baseCost: 15,
-					description: "You hire a experienced hunter to go out and kill monsters and other wild entities. The hunter will gather their spoils and sell them in village for you. They are work a reasonable amount of coins.",
-					name: "HUNTER",
-					quantity: 0,
-					rate: 10,
-					type: "something goes here",
-					unlockValue: 10,
-				},
-				{
-					baseCost: 20,
-					description: "You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.",
-					name: "THEIVE",
-					quantity: 0,
-					rate: 10,
-					type: "something goes here",
-					unlockValue: 10,
-				}
-			],
-		story: []
+			{
+				type: "something goes here",
+				name: "FARMER",
+				description: "You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people. Butthey don't sell for much.",
+				rate: 1,
+				quantity: 0,
+				baseCost: 10,
+				unlockValue: 10,
+			},
+			{
+				type: "something goes here",
+				name: "HUNTER",
+				description: "You hire a experienced hunter to go out and kill monsters and other wild entities. The hunter will gather their spoils and sell them in village for you. They are work a reasonable amount of coins.",
+				rate: 2,
+				quantity: 0,
+				baseCost: 15,
+				unlockValue: 20,
+			},
+			{
+				type: "something goes here",
+				name: "THEIVE",
+				description: "You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.",
+				rate: 3,
+				quantity: 0,
+				baseCost: 25,
+				unlockValue: 30,
+			}
+		],
+		story: [
+			{
+				name: "FARMER",
+				description: 'Picking crops...',
+				triggeredAt: 10,
+				state: `hidden`
+			},
+			{
+				name: "HUNTER",
+				description: 'Hunting for wild animals...',
+				triggeredAt: 15,
+				state: `hidden`
+			},
+			{
+				name: "THEIVE",
+				description: 'Pickpocketing random people with heavy pockets...',
+				triggeredAt: 25,
+				state: 'hidden'
+			}
+		]
 	};
 
 	// initialize store

@@ -1,3 +1,5 @@
+import generator from "./generator";
+
 export default function (store) {
 	return class StoryBookComponent extends window.HTMLElement {
 		constructor () {
@@ -15,16 +17,8 @@ export default function (store) {
 		connectedCallback () {
 			console.log('StorybookComponent#onConnectedCallback');
 			this.innerHTML = `
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
-				Scrollbar Test!<br/>
+				Welcome to the World of Coins!
+
 			`;
 			this.store.subscribe(this.onStateChange);
 		}

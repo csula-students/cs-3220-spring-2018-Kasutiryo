@@ -30,10 +30,7 @@ export default function (store) {
 				btn.addEventListener('click', () => {
 					this.store.dispatch({
 						type: 'BUY_GENERATOR',
-						payload: {
-							name: `${newState.generators[this.dataset.id].name}`,
-							quantity: `${newState.generators[this.dataset.id].quantity}`,
-						}
+						payload: newState.generators[this.dataset.id]
 					});
 				});
 			});
@@ -59,10 +56,7 @@ export default function (store) {
 				btn.addEventListener('click', () => {
 					this.store.dispatch({
 						type: 'BUY_GENERATOR',
-						payload: {
-							name: `${this.store.state.generators[this.dataset.id].name}`,
-							quantity: `${this.store.state.generators[this.dataset.id].quantity}`,
-						}
+						payload: this.store.state.generators[this.dataset.id]
 					});
 				});
 			});
