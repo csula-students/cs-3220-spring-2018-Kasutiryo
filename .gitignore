@@ -17,3 +17,8 @@ gradle-app.setting
 
 src/main/webapp/js/app.bundle.js
 src/main/webapp/js/app.bundle.js.map
+
+/lab4/bin
+/lab4/.settings
+/lab4/.classpath
+/lab4/.project

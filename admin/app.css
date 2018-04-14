@@ -1,15 +1,32 @@
-.container {
+a {
+    text-decoration: none;
+}
+
+.content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.col {
+.forms, form {
     display: flex;
     flex-direction: column;
-    width: 45%;
+    width: 50%;
 }
 
+.table {
+    border: 2px solid grey;
+    margin: 1em;
+}
+
+    .header {
+        background-color: antiquewhite;
+    }
+
+button {
+    width: 8em;
+    margin-top: 2em;
+}
 html {
     font-size: 62.5%;
     font-family: Avenir Next,Helvetica,Arial,Sans-Serif;
