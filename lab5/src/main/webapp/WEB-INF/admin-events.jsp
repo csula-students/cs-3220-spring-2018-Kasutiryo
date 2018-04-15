@@ -5,18 +5,18 @@
 <head>
     <meta charset='UTF-8'>
     <title>admin-events</title>
-    <link rel='stylesheet' href='/app.css'>
+    <link rel='stylesheet' href='<c:url value="/app.css"/>'>
     <h1>World of Coins Framework - Events</h1>
 </head>
 <nav class='nav'>
-    <a href='/admin/information'>Information</a> |
-    <a href='/admin/events'>Events</a> |
-    <a href='/admin/generators'>Generators</a>
+    <a href='<c:url value="/admin/information"/>'>Information</a> |
+    <a href='<c:url value="/admin/events"/>'>Events</a> |
+    <a href='<c:url value="/admin/generators"/>'>Generators</a>
 </nav>
 <main>
     <div class='content'>
         <div class='forms'>
-            <form action='/admin/events' method='post'>
+            <form action='<c:url value="/admin/events"/>' method='post'>
                 <label>Event ID(USE ONLY IF EDITTING AN EVENT): </label>
                 <input type='number' name='event_id'>
                 <label>Event Name: </label>
@@ -44,7 +44,7 @@
                     <td>${event.getDescription()}</td>
                     <td>${event.getTriggerAt()}</td>
                     <td>
-                        <a href='${request.getContextPath()}/admin/events?id=${event.getId()}&action=delete'>Delete</a>
+                        <a href='<c:url value="/admin/events"/>?id=${event.getId()}&action=delete'>Delete</a>
                     </td>
                 </tr>
             </c:forEach>
