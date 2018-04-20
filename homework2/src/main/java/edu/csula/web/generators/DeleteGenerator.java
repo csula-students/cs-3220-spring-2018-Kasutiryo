@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.csula.storage.servlet.GeneratorsDAOImpl;
+import edu.csula.storage.servlet.UsersDAOImpl;
 import edu.csula.storage.GeneratorsDAO;
 import edu.csula.models.Generator;
 
@@ -20,6 +21,12 @@ public class DeleteGenerator extends HttpServlet {
     @Override
     public void doGet( HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
+            
+        UsersDAOImpl user = new UsersDAOImpl(request.getSession());
+
+        if (!user.getAuthenticatedUser().isPresent()) {
+            response.sendRedirect(request.getContextPath() + "/admin/auth");
+        }
     
     	GeneratorsDAOImpl dao = new GeneratorsDAOImpl(getServletContext());
         Collection<Generator> generators = dao.getAll();

@@ -1,6 +1,7 @@
 package edu.csula.storage;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import edu.csula.models.Generator;
@@ -13,7 +14,7 @@ public interface GeneratorsDAO {
 	/**
 	 * Find all generators
 	 */
-	public Collection<Generator> getAll();
+	public List<Generator> getAll();
 	/**
 	 * Find a specific generator given its id
 	 */

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.csula.storage.servlet.EventsDAOImpl;
+import edu.csula.storage.servlet.UsersDAOImpl;
 //import edu.csula.storage.EventsDAO;
 import edu.csula.models.Event;
 
@@ -21,7 +22,12 @@ public class DeleteEvent extends HttpServlet {
 	@Override
     public void doGet( HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-    
+            
+    	UsersDAOImpl user = new UsersDAOImpl(request.getSession());
+
+		if (!user.getAuthenticatedUser().isPresent()) {
+			response.sendRedirect(request.getContextPath() + "/admin/auth");
+		}
     	EventsDAOImpl dao = new EventsDAOImpl(getServletContext());
         Collection<Event> events = dao.getAll();
         int id = parseIntSafe(request.getParameter("id"));    

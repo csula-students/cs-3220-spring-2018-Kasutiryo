@@ -1,6 +1,7 @@
 package edu.csula.storage.servlet;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import edu.csula.storage.UsersDAO;
 public class UsersDAOImpl implements UsersDAO {
 	private final HttpSession context;
 	protected static final String CONTEXT_NAME = "users";
+	private User admin = new User(0, "admin", "cs3220password");
 
 	public UsersDAOImpl(HttpSession context) {
 		this.context = context;
@@ -23,15 +25,10 @@ public class UsersDAOImpl implements UsersDAO {
 	public boolean authenticate(String username, String password) {
 		// TODO: check if username/password combination is valid and store the
 		//       username/password into the session
-		ArrayList<User> list = (ArrayList<User>) context.getAttribute("user");
 
-		for (int i = 0; i < list.size(); i++) {
-			User item = list.get(i);
-			if (item.getUsername() == username && item.getPassword() == password) {
-				context.setAttribute("username", username);
-				context.setAttribute("password", password);
-				return true;
-			}
+		if(admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
+			context.setAttribute(CONTEXT_NAME, admin);
+			return true;
 		}
 		return false;
 	}
@@ -39,7 +36,10 @@ public class UsersDAOImpl implements UsersDAO {
 	@Override
 	public Optional<User> getAuthenticatedUser() {
 		// TODO: return the authenticated user if there is any
-		return Optional.empty();
+		if (context.getAttribute(CONTEXT_NAME) == null) {
+			return Optional.empty();
+		}
+		return Optional.of(admin);
 	}
 
 	@Override

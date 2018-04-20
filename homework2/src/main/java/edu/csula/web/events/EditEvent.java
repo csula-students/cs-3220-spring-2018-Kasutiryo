@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.csula.storage.servlet.EventsDAOImpl;
+import edu.csula.storage.servlet.UsersDAOImpl;
 // import edu.csula.storage.EventsDAO;
 import edu.csula.models.Event;
 
@@ -23,6 +24,11 @@ public class EditEvent extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
+        UsersDAOImpl user = new UsersDAOImpl(request.getSession());
+
+        if (!user.getAuthenticatedUser().isPresent()) {
+            response.sendRedirect(request.getContextPath() + "/admin/auth");
+        }
         request.setAttribute("id", request.getParameter("id"));
 
             request.getRequestDispatcher("/WEB-INF/edit-event.jsp")

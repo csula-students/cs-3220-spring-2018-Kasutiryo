@@ -15,18 +15,18 @@
 </nav>
 <main>
     <div class='content'>
-        <form action='<c:url value="/admin/generators"/>' method='POST'>
+        <form class='box' action='<c:url value="/admin/generators"/>' method='POST'>
             <label>Generator Name</label>
-            <input type='text' name='generator_name'>
+            <input class='input' type='text' name='generator_name'>
             <label>Generator Rate</label>
-            <input type='number' name='generator_rate'>
+            <input class='input' type='number' name='generator_rate'>
             <label>Base Cost</label>
-            <input type='number' name='base_cost'>
+            <input class='input' type='number' name='base_cost'>
             <label>Unlocks At</label>
-            <input type='number' name='unlocks_at'>
+            <input class='input' type='number' name='unlocks_at'>
             <label>Description</label>
-            <input type='text' name='description'>
-            <input class='button' type='submit' value='add'>
+            <input class='input' type='text' name='description'>
+            <input class='button' type='submit' value='Add Generator'>
         </form>
         <table class='table'>
             <tr class='header'>
@@ -54,5 +54,9 @@
         </table>
     </div>
 </main>
-
+<footer>
+     <form class='box' action='<c:url value="/admin/auth"/>' method="DELETE">
+        <input type="submit" value="Logout">
+    </form> 
+</footer>
 </html>
