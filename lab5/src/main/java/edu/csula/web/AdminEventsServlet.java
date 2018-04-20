@@ -33,8 +33,6 @@ public class AdminEventsServlet extends HttpServlet {
 		// TODO: render the events page HTML
 		dao = new EventsDAOImpl(getServletContext());
 		events = dao.getAll();
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
 		
 		//DELETE event that was clicked and update event table
 		if (DELETE.equals(request.getParameter("action"))) {
@@ -45,6 +43,7 @@ public class AdminEventsServlet extends HttpServlet {
 
 		//RENDER HTML
 		request.getRequestDispatcher("/WEB-INF/admin-events.jsp").forward(request, response);
+		
 		
 	}
 

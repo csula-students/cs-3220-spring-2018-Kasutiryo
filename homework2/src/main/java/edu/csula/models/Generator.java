@@ -40,4 +40,22 @@ public class Generator {
 	public int getUnlockAt() {
 		return unlockAt;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		final Generator generator = (Generator) obj;
+		return this.id == generator.id && this.name.equals(generator.name) &&
+			this.description.equals(generator.description) &&
+			this.baseCost == generator.baseCost &&
+			this.rate == generator.rate &&
+			this.unlockAt == generator.unlockAt;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.id;
+	}
 }

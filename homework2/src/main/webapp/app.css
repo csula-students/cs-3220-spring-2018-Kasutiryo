@@ -17,14 +17,15 @@ a {
 .table {
     border: 2px solid grey;
     margin: 1em;
+    width: 75%;
 }
 
     .header {
         background-color: antiquewhite;
     }
 
-button { 
-    width: 10px;
+.button { 
+    margin-top: 2em;
 }
 html {
     font-size: 62.5%;
