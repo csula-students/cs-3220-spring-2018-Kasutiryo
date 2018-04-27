@@ -5,6 +5,7 @@ package edu.csula.storage;
  * DAO
  */
 public abstract class BaseDAO<T> {
+	
 	private final Storage<T> storage;
 
 	public BaseDAO(Storage<T> storage) {

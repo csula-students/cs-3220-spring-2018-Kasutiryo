@@ -1,8 +1,6 @@
 package edu.csula.storage.servlet;
 
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +39,7 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public List<Event> getAll() {
-		// TODO: read a list of events from context
+
 		Object events = context.getAttribute(CONTEXT_NAME);
 		if (events == null) {
 			return new ArrayList<>();
@@ -51,8 +49,7 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public Optional<Event> getById(int id) {
-		// TODO: get a certain event given its id from context (see getAll() on
-		// getting a list first and get a certain one from the list)
+
 		ArrayList<Event> list = (ArrayList<Event>) getAll();
 		for (Event item: list) {
 			if (item.getId() == id) 
@@ -63,7 +60,7 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public void set(int id, Event event) {
-		// TODO: set a certain event given id to be different from context
+
 		ArrayList<Event> list = (ArrayList<Event>) getAll();
 		int i = 0;
 		while(list.get(i).getId() != id) {
@@ -75,7 +72,7 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public void add(Event event) {
-		// TODO: add a new event to the context
+
 		ArrayList<Event> list = (ArrayList<Event>) getAll();
 		list.add(event);
 		context.setAttribute(CONTEXT_NAME, list);
@@ -83,7 +80,7 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public void remove(int id) {
-		// TODO: remove a single event given id
+
 		ArrayList<Event> list = (ArrayList<Event>) getAll();
 		int i = 0;
 		while(list.get(i).getId() != id) {
