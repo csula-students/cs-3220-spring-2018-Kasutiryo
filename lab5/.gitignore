@@ -22,18 +22,3 @@ tags*
 
 dest/
 .idea/
-
-/lab4/bin
-/lab4/.settings
-/lab4/.classpath
-/lab4/.project
-
-/lab5/bin
-/lab5/.settings
-/lab5/.classpath
-/lab5/.project
-
-/homework2/bin
-/homework2/.settings
-/homework2/.classpath
-/homework2/.project
