@@ -1,7 +1,6 @@
 package edu.csula.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -10,26 +9,65 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.csula.storage.servlet.EventsDAOImpl;
-import edu.csula.storage.EventsDAO;
+import edu.csula.storage.mysql.EventsDAOImpl;
+import edu.csula.storage.servlet.UsersDAOImpl;
+// import edu.csula.storage.EventsDAO;
 import edu.csula.models.Event;
+import edu.csula.storage.mysql.Database;
 
 @WebServlet("/admin/events")
 public class AdminEventsServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = -3514842077727662933L;
+
 	@Override
-	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		// TODO: render the events page HTML
-		EventsDAO dao = new EventsDAOImpl(getServletContext());
-		Collection<Event> events = dao.getAll();
-		System.out.println(events);
-		out.println("<h1>Hello events servlet!</h1>");
+	public void doGet( HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+
+		UsersDAOImpl user = new UsersDAOImpl(request.getSession());
+
+		if (!user.getAuthenticatedUser().isPresent()) {
+			response.sendRedirect(request.getContextPath() + "/admin/auth");
+		} 		
+			EventsDAOImpl dao = new EventsDAOImpl(new Database());
+			Collection<Event> events = dao.getAll();
+			request.setAttribute("events", events);
+
+			request.getRequestDispatcher("/WEB-INF/admin-events.jsp").forward(request, response);
+
 	}
 
 
 	@Override
-	public void doPost( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO: handle upsert transaction
+	public void doPost( HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+
+		String event_name = request.getParameter("event_name"),
+			event_description = request.getParameter("event_description");
+
+		int trigger_at = parseIntSafe(request.getParameter("trigger_at"));
+
+		EventsDAOImpl dao = new EventsDAOImpl(new Database());
+		Collection<Event> events = dao.getAll();
+		
+		dao.add(new Event(events.size(), 
+							event_name, 
+							event_description, 
+							trigger_at));
+
+		events = dao.getAll();
+		request.setAttribute("events", events);
+
+		request.getRequestDispatcher("/WEB-INF/admin-events.jsp")
+				.forward(request, response);
+
+	}
+
+	private int parseIntSafe(String s) {
+		try {
+			return Integer.parseInt(s);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 }

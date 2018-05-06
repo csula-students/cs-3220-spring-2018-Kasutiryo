@@ -46,17 +46,16 @@ INSERT INTO users VALUES
 SELECT * FROM users;
 
 INSERT INTO generators VALUES 
-	(1, 'Grandma', 'Grandma likes to make cookies', 5, 10, 10, 1),
-	(2, 'Factory', 'Factory to produce cookies', 10, 50, 50, 1),
-	(3, 'Mine', 'Mining cookies', 20, 200, 200, 2);
+	(1, 'FARMER', 'You hire a worker to tend to your crops. Your worker will then harvest crops that are ready to sell to people. But they do not sell for much.', 5, 10, 10, 1),
+	(2, 'HUNTER', 'You hire a experienced hunter to go out and kill monsters and other wild entities. The hunter will gather their spoils and sell them in village for you. They are work a reasonable amount of coins.', 10, 50, 50, 1),
+	(3, 'THEIVE', 'You hire a theive to go out to villages and steal from any civilian they can find. A big risk for a big win.', 20, 200, 200, 2);
 
 SELECT * FROM generators;
 
 INSERT INTO events VALUES
-	(1, 'Grandma shows up', 'You always know grandma likes to make cookies', 10, 1),
-	(2, 'You can construct factory now!', 'Factory to produce cookies', 50, 1),
-	(3, 'Weve found cookies in deep mountain ... in the mine?', 'Mining cookies', 200, 2),
-	(4, 'sample event', 'This is a sample event. Please delete me', 99999, 2);
+	(1, 'FARMER', 'Picking crops...', 10, 1),
+	(2, 'HUNTER', 'Hunting for wild animals...', 15, 1),
+	(3, 'THEIVE', 'Pickpocketing random people with heavy pockets...', 25, 2);
 
 SELECT * FROM events;
 
@@ -68,31 +67,31 @@ INSERT INTO quantities VALUES
 
 SELECT * FROM quantities;
 
-UPDATE generators SET 
-	unlock_at=10,
-	rate= 1
-WHERE
-	name='Grandma';
+-- UPDATE generators SET 
+-- 	unlock_at=10,
+-- 	rate= 1
+-- WHERE
+-- 	name='Grandma';
 
-SELECT * FROM generators;
+-- SELECT * FROM generators;
 
-SELECT 
-	q.quantity, g.name, g.description, g.rate, g.base_cost, g.unlock_at 
-FROM 
-	generators g 
-JOIN
-	quantities q 
-ON
-	g.id = q.generator_id
-WHERE
-	q.token = '80516ce4663c3bd0c8385309a2fe226e';
+-- SELECT 
+-- 	q.quantity, g.name, g.description, g.rate, g.base_cost, g.unlock_at 
+-- FROM 
+-- 	generators g 
+-- JOIN
+-- 	quantities q 
+-- ON
+-- 	g.id = q.generator_id
+-- WHERE
+-- 	q.token = '80516ce4663c3bd0c8385309a2fe226e';
 
-SELECT * FROM generators WHERE unlock_at = (SELECT MAX(unlock_at) FROM generators);
+-- SELECT * FROM generators WHERE unlock_at = (SELECT MAX(unlock_at) FROM generators);
 
-SELECT * FROM generators ORDER BY unlock_at ASC;
+-- SELECT * FROM generators ORDER BY unlock_at ASC;
 
-DELETE FROM events WHERE name = 'sample event';
+-- DELETE FROM events WHERE name = 'sample event';
 
-SELECT * FROM events;
+-- SELECT * FROM events;
 
 
