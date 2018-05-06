@@ -16,8 +16,8 @@ public class EventsDAOImpl implements EventsDAO {
 	// TODO: fill the Strings with the SQL queries as "prepated statements" and
 	//       use these queries variable accordingly in the method below
 	protected static final String getAllQuery = "SELECT * FROM events;";
-	protected static final String getByIdQuery = "SELECT * FROM events WHERE id = ?";
-	protected static final String setQuery = "UPDATE events SET ";
+	protected static final String getByIdQuery = "SELECT * FROM events WHERE id = (?)";
+	protected static final String setQuery = "UPDATE events SET id = ?, name = ?, description = ?, triggerAt = ? WHERE id = ?";
 	protected static final String addQuery = "INSERT INTO events (id, name, description, triggerAt) VALUES (?, ?, ?, ?)";
 	protected static final String removeQuery = "DELETE FROM events WHERE id =";
 
@@ -45,8 +45,9 @@ public class EventsDAOImpl implements EventsDAO {
 	@Override
 	public Optional<Event> getById(int id) {
 		// TODO: get specific event by id
-		try (Connection c = context.getConnection(); Statement stmt = c.createStatement()) {
-			ResultSet rs = stmt.executeQuery(getByIdQuery + id + ";");
+		try (Connection c = context.getConnection(); PreparedStatement stmt = c.prepareStatement(getByIdQuery)) {
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
 			Event event = new Event(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
 			return Optional.of(event);
 		} catch (SQLException e) {
@@ -69,12 +70,13 @@ public class EventsDAOImpl implements EventsDAO {
 		// WHERE 
 		// 	id = 3;
 
-		try (Connection c = context.getConnection(); PreparedStatement stmt = c.prepareStatement("")) {
-			stmt.execute(setQuery + 
-				"id = " +  event.getId() + "," + 
-				"name = '" + event.getName() + "'," + 
-				"description = '"  + event.getTriggerAt() +
-				"' WHERE id = " + id + ";");
+		try (Connection c = context.getConnection(); PreparedStatement stmt = c.prepareStatement(setQuery)) {
+			stmt.setInt(1, event.getId());
+			stmt.setString(2, event.getName());
+			stmt.setString(3, event.getDescription());
+			stmt.setInt(4, event.getTriggerAt());
+			stmt.setInt(5, id);
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			//TODO: handle exception
 			e.printStackTrace();
@@ -94,7 +96,7 @@ public class EventsDAOImpl implements EventsDAO {
 			stmt.setString(2, event.getName());
 			stmt.setString(3, event.getDescription());
 			stmt.setInt(4, event.getTriggerAt());
-			stmt.execute();
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
