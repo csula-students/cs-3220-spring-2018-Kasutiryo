@@ -35,7 +35,9 @@ public class DeleteEvent extends HttpServlet {
 
         dao.remove(id);
 
-        events = dao.getAll();
+		events = dao.getAll();
+		
+		request.setAttribute("events", events);
 
         request.getRequestDispatcher("/WEB-INF/admin-events.jsp")
             .forward(request, response);

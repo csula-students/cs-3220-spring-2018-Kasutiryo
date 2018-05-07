@@ -33,7 +33,8 @@ public class AdminEventsServlet extends HttpServlet {
 			Collection<Event> events = dao.getAll();
 			request.setAttribute("events", events);
 
-			request.getRequestDispatcher("/WEB-INF/admin-events.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/admin-events.jsp")
+				.forward(request, response);
 
 	}
 
@@ -50,7 +51,7 @@ public class AdminEventsServlet extends HttpServlet {
 		EventsDAOImpl dao = new EventsDAOImpl(new Database());
 		Collection<Event> events = dao.getAll();
 		
-		dao.add(new Event(events.size(), 
+		dao.add(new Event(events.size() + 1, 
 							event_name, 
 							event_description, 
 							trigger_at));
