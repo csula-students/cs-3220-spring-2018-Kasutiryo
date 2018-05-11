@@ -9,6 +9,7 @@ import CounterComponent from './views/counter';
 import ExampleComponent from './views/example';
 import GeneratorComponent from './views/generator';
 import StoryBookComponent from './views/story-book';
+import Story from './models/story';
 
 /**
  * Data flow diagram
@@ -74,16 +75,10 @@ main();
 // main function wraps everything at top level
 function main () {
 	// TODO: fill the blank based on the theme you have choosen
-	const initialState = {
-		example: 'Hello custom element',
-		counter: 0,
-		generators: [],
-		stories: []
-	};
-
-	// initialize store
+	const initialState = window.game.state;
+	console.log(window.game.state);
 	const store = new Store(reducer, initialState);
-	console.log(ExampleComponent(store));
+	console.log(store);
 
 	// define web components
 	window.customElements.define('component-example', ExampleComponent(store));

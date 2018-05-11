@@ -39,29 +39,54 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public List<Event> getAll() {
-		// TODO: read a list of events from context
-		return new ArrayList<>();
+
+		Object events = context.getAttribute(CONTEXT_NAME);
+		if (events == null) {
+			return new ArrayList<>();
+		}
+		return (ArrayList<Event>) events;
 	}
 
 	@Override
 	public Optional<Event> getById(int id) {
-		// TODO: get a certain event given its id from context (see getAll() on
-		// getting a list first and get a certain one from the list)
+
+		ArrayList<Event> list = (ArrayList<Event>) getAll();
+		for (Event item: list) {
+			if (item.getId() == id) 
+				return Optional.of(item);
+		}
 		return Optional.empty();
 	}
 
 	@Override
 	public void set(int id, Event event) {
-		// TODO: set a certain event given id to be different from context
+
+		ArrayList<Event> list = (ArrayList<Event>) getAll();
+		int i = 0;
+		while(list.get(i).getId() != id) {
+			i++;
+		}
+		list.set(i, event);
+		context.setAttribute(CONTEXT_NAME, list);
 	}
 
 	@Override
 	public void add(Event event) {
-		// TODO: add a new event to the context
+
+		ArrayList<Event> list = (ArrayList<Event>) getAll();
+		list.add(event);
+		context.setAttribute(CONTEXT_NAME, list);
 	}
 
 	@Override
 	public void remove(int id) {
-		// TODO: remove a single event given id
+
+		ArrayList<Event> list = (ArrayList<Event>) getAll();
+		int i = 0;
+		while(list.get(i).getId() != id) {
+			i++;
+		}
+		list.remove(i);
+		context.setAttribute(CONTEXT_NAME, list);
 	}
 }

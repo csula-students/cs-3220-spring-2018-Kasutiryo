@@ -26,7 +26,7 @@ public class GuestbookDAOImpl implements GuestbookDAO {
 				entry.comment = rs.getString(3);
 				result.add(entry);
 			}
-		} catch (SQLException e) {
+		} catch (SQLException e) {		
 			e.printStackTrace();
 			return new ArrayList<>();
 		}
