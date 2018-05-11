@@ -24,7 +24,11 @@ dest/
 .idea/
 
 .settings
-bin
-build
+.vscode
+bin/
+client/node_modules
+client/test
 .classpath
-.project
+src/test/java/edu
+src/test/java/hello
+scripts/
