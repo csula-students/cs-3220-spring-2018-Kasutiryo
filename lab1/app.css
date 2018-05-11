@@ -1,0 +1,44 @@
+.terminal {
+	border: 2px solid grey;
+	color: white;
+	background-color: black;
+	width: 90%;
+	height: 10em;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.col {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.rate {
+	font-size: 1rem;
+}
+
+#coinPouch {
+	width: 25%;
+	
+}
+
+html {
+    font-size: 62.5%;
+    font-family: Avenir Next,Helvetica,Arial,Sans-Serif;
+}
+
+body {
+    font-size: 1.8rem;
+    line-height: 1.618;
+    max-width: 75em;
+    margin: auto;
+    color: #4a4a4a;
+    background-color: #f9f9f9;
+    padding: 1.3rem;
+}
