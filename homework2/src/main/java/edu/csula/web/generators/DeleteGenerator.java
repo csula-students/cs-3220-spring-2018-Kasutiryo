@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.csula.storage.servlet.GeneratorsDAOImpl;
 import edu.csula.storage.servlet.UsersDAOImpl;
-import edu.csula.storage.GeneratorsDAO;
 import edu.csula.models.Generator;
 
 
 @WebServlet("/admin/generators/delete")
 public class DeleteGenerator extends HttpServlet {
 
-    @Override
+    private static final long serialVersionUID = -682597046732125868L;
+
+	@Override
     public void doGet( HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
             
