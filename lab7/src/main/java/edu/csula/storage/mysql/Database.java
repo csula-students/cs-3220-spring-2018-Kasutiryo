@@ -11,10 +11,6 @@ public class Database implements edu.csula.storage.Database{
 	// private static final String host = "localhost";
 	// private static final String url = String.format("jdbc:mysql://%s/%s", host, database);
 
-	private static final String database = "cs3220stu35";
-	private static final String host = "cs3.calstatela.edu";
-	private static final String url = String.format("jdbc:mysql://%s/%s", host, database);
-
 
 	public Database() {
 		try {

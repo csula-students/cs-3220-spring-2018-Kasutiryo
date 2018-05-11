@@ -67,31 +67,5 @@ INSERT INTO quantities VALUES
 
 SELECT * FROM quantities;
 
--- UPDATE generators SET 
--- 	unlock_at=10,
--- 	rate= 1
--- WHERE
--- 	name='Grandma';
-
--- SELECT * FROM generators;
-
--- SELECT 
--- 	q.quantity, g.name, g.description, g.rate, g.base_cost, g.unlock_at 
--- FROM 
--- 	generators g 
--- JOIN
--- 	quantities q 
--- ON
--- 	g.id = q.generator_id
--- WHERE
--- 	q.token = '80516ce4663c3bd0c8385309a2fe226e';
-
--- SELECT * FROM generators WHERE unlock_at = (SELECT MAX(unlock_at) FROM generators);
-
--- SELECT * FROM generators ORDER BY unlock_at ASC;
-
--- DELETE FROM events WHERE name = 'sample event';
-
--- SELECT * FROM events;
 
 
