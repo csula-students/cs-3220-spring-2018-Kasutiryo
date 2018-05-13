@@ -7,11 +7,11 @@ import java.sql.SQLException;
 public class Database implements edu.csula.storage.Database{
 	// FIXME: don't hard commit your credential
 	
-	private static final String database = "cs3220stu35";
-	private static final String host = "cs3.calstatela.edu";
+	private static final String database = "";
+	private static final String host = "";
 	private static final String url = String.format("jdbc:mysql://%s/%s", host, database);
-	private static final String username = "cs3220stu35";
-	private static final String password = "R4xqK#BN";
+	private static final String username = "";
+	private static final String password = "";
 
 	public Database() {
 		try {
