@@ -25,7 +25,7 @@ public class AuthenticationServlet extends HttpServlet {
 
 		doDelete(request, response);
 		
-		request.getRequestDispatcher("/WEB-INF/login.jsp")
+		request.getRequestDispatcher("/WEB-INF/admin-authentication.jsp")
 			.forward(request, response);
 	}
 
@@ -42,7 +42,7 @@ public class AuthenticationServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/admin-events.jsp")
 				.forward(request, response);
 		} else {
-			request.getRequestDispatcher("/WEB-INF/login-error.jsp")
+			request.getRequestDispatcher("/WEB-INF/admin-authentication-error.jsp")
 				.forward(request, response);
 		}
 

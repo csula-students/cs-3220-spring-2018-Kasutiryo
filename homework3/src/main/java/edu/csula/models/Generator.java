@@ -7,6 +7,7 @@ public class Generator {
 	private final int rate;
 	private final int baseCost;
 	private final int unlockAt;
+	private int quantity;
 
 	public Generator(int id, String name, String description, int rate, int baseCost, int unlockAt) {
 		this.id = id;
@@ -15,6 +16,7 @@ public class Generator {
 		this.rate = rate;
 		this.baseCost = baseCost;
 		this.unlockAt = unlockAt;
+		this.quantity = 0;
 	}
 
 	public int getId() {
