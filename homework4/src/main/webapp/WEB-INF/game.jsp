@@ -7,8 +7,7 @@
         <link rel="stylesheet" href='<c:url value="/game-app.css"/>'>
         <title>World of Coins</title>
         <script>
-            window.game = {};
-            window.game.state = ${state};
+            window.game = ${state};
         </script>
     </head>
 

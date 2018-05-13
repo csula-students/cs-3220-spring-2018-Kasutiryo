@@ -1,5 +1,6 @@
 package edu.csula.storage;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public interface GeneratorsDAO {
 	 */
 	public void add(Generator generator);
 	/**
-	 * remove a single generator given id
+	 * added thid method, will delete a generator from the collection
 	 */
 	public void remove(int id);
 }

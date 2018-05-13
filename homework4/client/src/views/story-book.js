@@ -11,9 +11,11 @@ export default function (store) {
 
 		handleStateChange (newState) {
 			// TODO: display story based on the state "resource" and "stories"
+			console.log('StorybookComponent#stateChange');
 		}
 
 		connectedCallback () {
+			console.log('StorybookComponent#onConnectedCallback');
 			this.innerHTML = `
 				Welcome to the World of Coins!
 

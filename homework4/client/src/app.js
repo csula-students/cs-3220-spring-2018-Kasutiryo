@@ -75,10 +75,11 @@ main();
 // main function wraps everything at top level
 function main () {
 	// TODO: fill the blank based on the theme you have choosen
-	const initialState = window.game.state;
-	console.log(window.game.state);
+	const initialState = window.game;
+
+	// initialize store
 	const store = new Store(reducer, initialState);
-	console.log(store);
+	console.log(ExampleComponent(store));
 
 	// define web components
 	window.customElements.define('component-example', ExampleComponent(store));

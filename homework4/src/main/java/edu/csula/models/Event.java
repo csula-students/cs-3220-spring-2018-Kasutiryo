@@ -5,12 +5,14 @@ public class Event {
 	private String name;
 	private String description;
 	private int triggerAt;
+	private String state;
 
 	public Event(int id, String name, String description, int triggerAt) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.triggerAt = triggerAt;
+		this.state = "hidden";
 	}
 
 	public int getId() {

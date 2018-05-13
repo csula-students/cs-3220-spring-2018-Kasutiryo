@@ -22,13 +22,3 @@ tags*
 
 dest/
 .idea/
-
-.settings
-.vscode
-bin/
-client/node_modules
-client/test
-.classpath
-src/test/java/edu
-src/test/java/hello
-scripts/

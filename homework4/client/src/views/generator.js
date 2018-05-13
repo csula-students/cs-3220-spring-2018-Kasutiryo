@@ -13,6 +13,7 @@ export default function (store) {
 		}
 
 		handleStateChange (newState) {
+			console.log('GeneratorComponent#stateChange', newState.generators);
 			this.innerHTML = `                
 						<div class="titleRow">
 							<h5> ${newState.generators[this.dataset.id].name} </h5>
@@ -36,6 +37,8 @@ export default function (store) {
 		}
 
 		connectedCallback () {
+			console.log('GeneratorComponent#onConnectedCallback');
+
 			this.innerHTML = `                
 						<div class="titleRow">
 							<h5> ${this.store.state.generators[this.dataset.id].name} </h5>

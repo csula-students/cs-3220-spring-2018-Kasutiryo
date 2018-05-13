@@ -135,6 +135,7 @@ exports.default = function (store) {
 		}
 
 		handleStateChange(newState) {
+			console.log('GeneratorComponent#stateChange', newState.generators);
 			this.innerHTML = `                
 						<div class="titleRow">
 							<h5> ${newState.generators[this.dataset.id].name} </h5>
@@ -158,6 +159,8 @@ exports.default = function (store) {
 		}
 
 		connectedCallback() {
+			console.log('GeneratorComponent#onConnectedCallback');
+
 			this.innerHTML = `                
 						<div class="titleRow">
 							<h5> ${this.store.state.generators[this.dataset.id].name} </h5>
@@ -298,10 +301,11 @@ main();
 // main function wraps everything at top level
 function main() {
   // TODO: fill the blank based on the theme you have choosen
-  const initialState = window.game.state;
-  console.log(window.game.state);
+  const initialState = window.game;
+
+  // initialize store
   const store = new _store2.default(_reducer2.default, initialState);
-  console.log(store);
+  console.log((0, _example2.default)(store));
 
   // define web components
   window.customElements.define('component-example', (0, _example2.default)(store));
@@ -1085,7 +1089,7 @@ exports.default = function (store) {
 		}
 
 		connectedCallback() {
-			this.innerHTML = `<output></output>`;
+			this.innerHTML = `<output>0</output>`;
 			this.store.subscribe(this.onStateChange);
 		}
 
@@ -1165,9 +1169,11 @@ exports.default = function (store) {
 
 		handleStateChange(newState) {
 			// TODO: display story based on the state "resource" and "stories"
+			console.log('StorybookComponent#stateChange');
 		}
 
 		connectedCallback() {
+			console.log('StorybookComponent#onConnectedCallback');
 			this.innerHTML = `
 				Welcome to the World of Coins!
 

@@ -14,7 +14,7 @@ export default function (store) {
 		}
 
 		connectedCallback () {
-			this.innerHTML = `<output></output>`;
+			this.innerHTML = `<output>0</output>`;
 			this.store.subscribe(this.onStateChange);
 		}
 

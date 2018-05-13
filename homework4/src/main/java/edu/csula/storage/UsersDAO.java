@@ -1,6 +1,5 @@
 package edu.csula.storage;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import edu.csula.models.User;
