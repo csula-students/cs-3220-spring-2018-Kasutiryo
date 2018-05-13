@@ -1,7 +1,6 @@
 package edu.csula.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.servlet.ServletException;
@@ -12,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/hellojsp")
 public class HelloJSP extends HttpServlet {
+	
+	private static final long serialVersionUID = -6760922241976551691L;
+
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		getServletContext().setAttribute("test", "Hello");
 		Collection<Integer> list = new ArrayList<>();

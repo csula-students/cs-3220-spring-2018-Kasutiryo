@@ -4,29 +4,10 @@ export default function (store) {
 			super();
 			this.store = store;
 
-
 			this.onStateChange = this.handleStateChange.bind(this);
-
 
 			// TODO: add click event to increment counter
 			// hint: use "store.dispatch" method (see example component)
-		}
-
-		handleStateChange (newState) {
-		}
-		
-		connectedCallback () {
-			this.innerHTML = `<button>BEG FOR MONEY</button>`;
-			this.addEventListener('click', () => {
-				this.store.dispatch({
-					type: 'BUTTON_CLICK'
-				});
-			});
-			this.store.subscribe(this.onStateChange);
-		}
-
-		disconnectedCallback () {
-			this.store.unsubscribe(this.onStateChange);
 		}
 	};
 }

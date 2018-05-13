@@ -22,9 +22,3 @@ tags*
 
 dest/
 .idea/
-
-.settings
-bin
-build
-.classpath
-.project

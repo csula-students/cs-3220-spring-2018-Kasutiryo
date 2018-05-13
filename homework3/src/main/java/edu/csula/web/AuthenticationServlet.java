@@ -24,7 +24,9 @@ public class AuthenticationServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		doDelete(request, response);
-
+		
+		request.getRequestDispatcher("/WEB-INF/login.jsp")
+			.forward(request, response);
 	}
 
 	@Override
@@ -37,7 +39,7 @@ public class AuthenticationServlet extends HttpServlet {
 			password = request.getParameter("password");
 
 		if(dao.authenticate(username, password)) {
-			request.getRequestDispatcher("/admin/events")
+			request.getRequestDispatcher("/WEB-INF/admin-events.jsp")
 				.forward(request, response);
 		} else {
 			request.getRequestDispatcher("/WEB-INF/login-error.jsp")

@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.csula.storage.mysql.EventsDAOImpl;
+import edu.csula.storage.servlet.EventsDAOImpl;
 import edu.csula.storage.servlet.UsersDAOImpl;
 // import edu.csula.storage.EventsDAO;
 import edu.csula.models.Event;
-import edu.csula.storage.mysql.Database;
 
 @WebServlet("/admin/events")
 public class AdminEventsServlet extends HttpServlet {
@@ -29,12 +28,10 @@ public class AdminEventsServlet extends HttpServlet {
 		if (!user.getAuthenticatedUser().isPresent()) {
 			response.sendRedirect(request.getContextPath() + "/admin/auth");
 		} 		
-			EventsDAOImpl dao = new EventsDAOImpl(new Database());
-			Collection<Event> events = dao.getAll();
-			request.setAttribute("events", events);
+			EventsDAOImpl dao = new EventsDAOImpl(getServletContext());
+			// Collection<Event> events = dao.getAll();
 
-			request.getRequestDispatcher("/WEB-INF/admin-events.jsp")
-				.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/admin-events.jsp").forward(request, response);
 
 	}
 
@@ -48,10 +45,10 @@ public class AdminEventsServlet extends HttpServlet {
 
 		int trigger_at = parseIntSafe(request.getParameter("trigger_at"));
 
-		EventsDAOImpl dao = new EventsDAOImpl(new Database());
+		EventsDAOImpl dao = new EventsDAOImpl(getServletContext());
 		Collection<Event> events = dao.getAll();
 		
-		dao.add(new Event(events.size() + 1, 
+		dao.add(new Event(events.size(), 
 							event_name, 
 							event_description, 
 							trigger_at));
